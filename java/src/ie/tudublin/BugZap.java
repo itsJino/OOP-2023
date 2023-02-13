@@ -4,64 +4,119 @@ import processing.core.PApplet;
 
 public class BugZap extends PApplet
 {
+	float playerX, playerY, playerWidth;
+	float bugX1, bugY1, bugX2, bugY2, bugX3, bugY3, bugWidth;
+
+	float halfPlayer, halfBug;
 
 	public void settings()
 	{
-		size(500, 500);
+		size(1920, 1080);
 	}
 
 	public void setup() {
 		colorMode(HSB);
 		background(0);
-
-		x1 = random(0, width);
-		x2 = random(0, width);
-		y1 = random(0, height);
-		y2 = random(0, height);
-
-		float range = 5;
-
-		x1dir = random(-range, range);
-		x2dir = random(-range, range);
-		y1dir = random(-range, range);
-		y2dir = random(-range, range);
-
 		smooth();
+
+		playerX = width * 0.5f;
+		playerY = height - 100;
+		playerWidth = 50;
+		halfPlayer = playerWidth * 0.5f;
+
+		resetBug();
+	}
+
+	void resetBug()
+	{
+		bugX1 = random(width);
+		bugY1 = 50;
+
+		bugX2 = bugX1 - 20;
+		bugY2 = 30;
+
+		bugX3 = bugX1 + 20;
+		bugY3 = 30;
+
+	}
+
+	void drawPlayer(float x, float y, float w) 
+	{
+		noFill();
+		stroke(255);
+		rectMode(CENTER);
+		rect(x, y, w, w);
+		line(x, y - halfPlayer, x, y - halfPlayer * 2);
+	}
+
+	void drawBug(float x1, float y1, float x2, float y2, float x3, float y3) 
+	{
+		noFill();
+		stroke(255);
+		
+		triangle(x1,y1,x2,y2,x3,y3);
 		
 	}
 
-	float x1, y1, x2, y2;
-	float x1dir, x2dir, y1dir, y2dir;
-	float c = 0;
+	void moveBug(float x1, float y1, float y2, float y3)
+	{
+		float randDirection = random(1, 10);
+
+		if(randDirection > 5)
+		{
+			bugX1 = x1 + random(10,20);
+			bugY1 = y1 + 20;
+
+			bugX2 = bugX1 - 20;
+			bugY2 = y2 + 20;
+
+			bugX3 = bugX1 + 20;
+			bugY3 = y3 + 20;
+		}
+		else if(randDirection < 5)
+		{
+			bugX1 = x1 - random(10, 20);
+			bugY1 = y1 + 20;
+
+			bugX2 = bugX1 - 20;
+			bugY2 = y2 + 20;
+
+			bugX3 = bugX1 + 20;
+			bugY3 = y3 + 20;
+		}
+	
+	}
+
+	public void keyPressed() // polymorphism: the type is of the superclass but the instance is of the subclass
+	{
+		if(keyCode == LEFT)
+		{
+			playerX -=10;
+		}
+
+		if(keyCode == RIGHT)
+		{
+			playerX +=10;
+		}
+
+		if(key == ' ')
+		{
+			line(playerX, playerY - halfPlayer, playerX, 0);
+		}
+
+	}
 	
 	public void draw()
 	{	
-		strokeWeight(2);
-		stroke(c, 255, 255);
-		c = (c + 1f) % 255;
-		line(x1, y1, x2, y2);
+		background(0);
+		drawPlayer(playerX, playerY, playerWidth);
+		drawBug(bugX1, bugY1, bugX2, bugY2, bugX3, bugY3);
 
-		x1 += x1dir;
-		x2 += x2dir;
-		y1 += y1dir;
-		y2 += y2dir;
+
+		if ((frameCount % 60) == 0)
+		{
+			moveBug(bugX1, bugY1, bugY2, bugY3);
+		}
 		
-		if (x1 < 0 || x1 > width)
-		{
-			x1dir = - x1dir;
-		}
-		if (y1 < 0 || y1 > height)
-		{
-			y1dir = - y1dir;
-		}
-
-		if (x2 < 0 || x2 > width)
-		{
-			x2dir = - x2dir;
-		}
-		if (y2 < 0 || y2 > height)
-		{
-			y2dir = - y2dir;
-		}
 	}
 }
