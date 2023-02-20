@@ -44,6 +44,27 @@ public class Loops extends PApplet {
 				off += (mouseY / 50.0f);
 				break;
 			case 1:
+				float section = width / 4;
+				if(mouseX < section)
+				{
+					fill(255);
+					rect(0, 0, section, height);
+				}
+				else if(mouseX > section & mouseX < (section * 2))
+				{
+					fill(255);
+					rect(section, 0, section, height);
+				}
+				else if(mouseX > (section * 2) & mouseX < (section * 3))
+				{
+					fill(255);
+					rect(section * 2, 0, section, height);
+				}
+				else if(mouseX > (section * 3) & mouseX < (section * 4))
+				{
+					fill(255);
+					rect(section * 3, 0, section, height);
+				}
 				break;
 			default:
 				break;
