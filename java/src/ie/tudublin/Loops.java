@@ -89,6 +89,21 @@ public class Loops extends PApplet {
 					C = (C + 25f) % 255;
 					rect((sectW * i), (sectH * i), sectW, sectH);
 				}
+			case 4:
+				numS = 10;
+				sectW = width / numS;
+				sectH = height / numS;
+				C = 0; 
+
+				for(int i = 0; i < numS; i++)
+				{
+					fill(C, 255, 255);
+					C = (C + 25f) % 255;
+					rect((sectW * i), (sectH * i), sectW, sectH);
+					rect(((width - sectW) - (sectW * i)), (sectH * i), sectW, sectH);
+				}
+
+				
 			default:
 				break;
 		}
