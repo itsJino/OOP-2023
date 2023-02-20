@@ -25,7 +25,6 @@ public class Loops extends PApplet {
 
 	public void draw() {
 		background(0);
-		fill(255);
 		noStroke();
 
 		switch (mode) {
@@ -67,6 +66,17 @@ public class Loops extends PApplet {
 					rect(sectionWidth * 3, 0, sectionWidth, sectionHeight);
 				}
 				break;
+			case 2:
+				int numSections = 10;
+				int sectionW = width / numSections;
+				float c = 0; 
+
+				for(int i = 0; i < numSections; i++)
+				{
+					fill(c, 255, 255);
+					c = (c + 18f) % 255;
+					rect((sectionW * i), 0, sectionW, height);
+				}
 			default:
 				break;
 		}
