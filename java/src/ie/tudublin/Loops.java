@@ -102,6 +102,8 @@ public class Loops extends PApplet {
 					rect((sectW * i), (sectH * i), sectW, sectH);
 					rect(((width - sectW) - (sectW * i)), (sectH * i), sectW, sectH);
 				}
+			case 5:
+				
 
 				
 			default:
