@@ -2,10 +2,72 @@ package ie.tudublin;
 
 import processing.core.PApplet;
 import java.util.*;
-import java.lang.Math;
+
+import ddf.minim.AudioBuffer;
+import ddf.minim.AudioInput;
+import ddf.minim.AudioPlayer;
+import ddf.minim.Minim;
+import ddf.minim.analysis.FFT;
 
 public class PitchSpeller extends PApplet 
 {
+    Minim m;
+    AudioInput ai;
+    AudioPlayer ap;
+    AudioBuffer ab;
+
+    FFT fft;
+
+    float[] lerpedBuffer;
+    float lerpedRadius;
+
+    public void settings()
+    {
+        size(1024, 1000);
+    }
+
+    public void setup()
+    {
+        m = new Minim(this);
+        ai = m.getLineIn(Minim.MONO, width, 44100, 16);
+        ab = ai.mix;
+        lerpedBuffer = new float[width];
+
+        fft = new FFT(width, 44100);
+    }
+
+    public void draw()
+    {
+        background(0);
+        colorMode(HSB);
+
+        fft.forward(ab);
+        stroke(255);
+
+        int highestIndex = 0;
+        for(int i = 0 ;i < fft.specSize() / 2 ; i ++)
+        {
+            line(i * 2.0f, height, i * 2.0f, height - fft.getBand(i) * 5.0f);
+
+            if (fft.getBand(i) > fft.getBand(highestIndex))
+            {
+                highestIndex = i;
+            }
+        }
+
+        float freq = fft.indexToFreq(highestIndex);
+        fill(255);
+        textSize(20);
+        text("Freq: " + freq, 100, 100);
+
+        text(spell(freq), 100, 200);
+
+        float r = map(freq, 200.0f, 1200.0f, height/2, 0);
+        lerpedRadius = lerp(lerpedRadius, r, 0.1f);
+        circle(width/ 2, height/ 2, lerpedRadius);
+
+    }
+
     public String spell(float frequency)
     {
         float difference = 1000;
