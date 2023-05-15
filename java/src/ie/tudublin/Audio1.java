@@ -123,18 +123,15 @@ public class Audio1 extends PApplet
 
 
         
-        // Other examples we made in the class
-        /*
+        
         stroke(255);
         fill(100, 255, 255);        
-        
-        circle(width / 2, halfH, lerpedA * 100);
 
         circle(100, y, 50);
         y += random(-10, 10);
         smoothedY = lerp(smoothedY, y, 0.1f);        
         circle(200, smoothedY, 50);
-        */
+        
 
     }        
 }

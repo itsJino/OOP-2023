@@ -50,7 +50,49 @@ public class Main
 		String[] a = {"MAIN"};
         processing.core.PApplet.runSketch( a, new Life());
     }
-	
+
+	public static void scene1()
+	{
+		String[] a = {"MAIN"};
+        processing.core.PApplet.runSketch( a, new Scene1());
+    }
+
+	public static void scene3()
+	{
+		String[] a = {"MAIN"};
+        processing.core.PApplet.runSketch( a, new Scene3());
+    }
+
+	public static void particle()
+	{
+		String[] a = {"MAIN"};
+        processing.core.PApplet.runSketch( a, new Particle());
+    }
+
+	public static void particlescene()
+	{
+		String[] a = {"MAIN"};
+        processing.core.PApplet.runSketch( a, new ParticleScene());
+    }
+
+	public static void cubes()
+	{
+		String[] a = {"MAIN"};
+        processing.core.PApplet.runSketch( a, new Cubes());
+    }
+
+	public static void spirals()
+	{
+		String[] a = {"MAIN"};
+        processing.core.PApplet.runSketch( a, new Spirals());
+    }
+
+	public static void sunslit()
+	{
+		String[] a = {"MAIN"};
+		processing.core.PApplet.runSketch( a, new SunSlit());
+	}
+
 	public static void main(String[] args)
 	{
 		System.out.println("Hello world");
@@ -59,7 +101,7 @@ public class Main
 		penny.setName("Penny");
 		penny.speak();
 
-		life();
+		sunslit();
 	}
 	
 }

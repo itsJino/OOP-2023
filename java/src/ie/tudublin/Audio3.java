@@ -42,7 +42,7 @@ public class Audio3 extends PApplet{
 
     public void settings()
     {
-        fullScreen(P3D, SPAN);
+        fullScreen(P3D);
         // size(1024, 1024, P3D);
     }
 
@@ -50,6 +50,7 @@ public class Audio3 extends PApplet{
     {
         m = new Minim(this);
         ap = m.loadFile("tomp3.cc - 08 PsychNerD and Marco G  More Cowbell.mp3", 1024);
+        ap.play();
         // i = m.getLineIn(Minim.MONO, width, 44100, 16);
         ab = ap.mix;
 
